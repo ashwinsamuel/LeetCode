@@ -24,9 +24,12 @@ class Solution:
                 if s == target:
                     return s
                 elif s < target:
+                    l+=1
+                    '''
                     l_prev = l
                     while nums[l_prev] == nums[l] and l<r:
                         l += 1
+                    '''
                 else:
                     r-=1
                     '''
