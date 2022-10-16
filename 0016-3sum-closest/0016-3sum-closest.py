@@ -28,8 +28,11 @@ class Solution:
                     while nums[l_prev] == nums[l] and l<r:
                         l += 1
                 else:
+                    r-=1
+                    '''
                     r_prev = r
                     while nums[r_prev] == nums[r] and l<r:
                         r -= 1
+                    '''
         
         return ans
