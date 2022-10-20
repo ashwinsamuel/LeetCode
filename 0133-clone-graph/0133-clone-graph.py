@@ -12,8 +12,7 @@ class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
         mem_dict = {}
         
-        if node == None:
-            return None
+        if not node: return node
         
         clone = Node(1)
         mem_dict[1] = clone
