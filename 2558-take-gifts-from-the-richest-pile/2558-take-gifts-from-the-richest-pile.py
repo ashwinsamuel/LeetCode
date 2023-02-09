@@ -10,7 +10,7 @@ class Solution:
                     max_id = i
                     max_w = gifts[i]
             
-            gifts[max_id] = int(math.sqrt(max_w)//1)
+            gifts[max_id] = int(math.sqrt(max_w))
         
         return sum(gifts)
             
