@@ -3,6 +3,7 @@ class Solution:
         for i in range(k):
             
             #find max
+            '''
             max_w = 0
             max_id = 0
             for i in range(len(gifts)):
@@ -16,6 +17,6 @@ class Solution:
             max_w = max(gifts)
             max_id = gifts.index(max_w)
             gifts[max_id] = int(math.sqrt(gifts[max_id]))
-            '''
+            
         return sum(gifts)
             
