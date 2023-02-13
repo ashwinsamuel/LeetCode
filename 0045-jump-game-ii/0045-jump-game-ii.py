@@ -6,5 +6,5 @@ class Solution:
         while r < len(nums) - 1:
             times += 1
             nxt = max(i + nums[i] for i in range(l, r + 1))
-            l, r = r, nxt
+            l, r = r+1, nxt
         return times
