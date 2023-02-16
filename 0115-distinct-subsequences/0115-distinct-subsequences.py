@@ -6,18 +6,22 @@ class Solution:
         n=len(s)
         m=len(t)
         
-        word_ending = {j:0 for j in range(m)}
+        word_ending = {}
         for i in range(n):
             updates=[]
             for j in range(m):
                 if s[i]==t[j]:
                     if j==0:
                         updates.append((j,1))
-                    else:
+                    
+                    if j-1 in word_ending:
                         updates.append((j,word_ending[j-1]))
             
             for idx,upd in updates:
-                word_ending[idx] += upd
+                if idx not in word_ending:
+                    word_ending[idx] = upd
+                else:
+                    word_ending[idx] += upd
     
-        return word_ending[m-1]
+        return word_ending[m-1] if m-1 in word_ending else 0
                         
