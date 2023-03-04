@@ -5,11 +5,9 @@ class Solution:
         for i in range(1,n):
             nums[i]=nums[i]^nums[i-1]
         
+        maxk = (1<<maximumBit) - 1
         ans = deque()
         for num in nums:
-            k=0
-            for shift in range(maximumBit):
-                if num & 1<<shift == 0:
-                    k = k | 1<<shift
+            k=num^maxk
             ans.appendleft(k)
         return ans
