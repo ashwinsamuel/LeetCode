@@ -6,5 +6,9 @@ class Solution:
         for i in range(2,n+1):
             dp.append(i)
             for x in range(1,i):
-                dp[i] = min( dp[i] , max(x,dp[i-x]+1) )
+                temp = max(x,dp[i-x]+1)
+                if temp>dp[i]:
+                    break
+                else:
+                    dp[i] = temp
         return dp[n]
