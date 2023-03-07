@@ -5,7 +5,8 @@ class Solution:
         
         #min k s.t. k//time[0] + k//time[1] + ...k//time[id] >= totalTrip        
         l = 0
-        r = time[-1]*(totalTrips//n+1) if totalTrips>=n else time[totalTrips-1]
+        #r = time[-1]*(totalTrips//n+1) if totalTrips>=n else time[totalTrips-1]
+        r=10**14
         while l<r:
             m=(l+r)//2
             k=bisect_right(time,m)
