@@ -4,12 +4,11 @@ class Solution:
         
         #if h==len(piles) then k=max(piles)
         n=len(piles)
-        l,r=0,max(piles)
+        l,r=1,max(piles)
         
         while l<r:
             mid=(l+r)//2
-            if mid==0: return 1
-            tsum= sum(pile//mid+1 if pile%mid else pile//mid for pile in piles)
+            tsum= sum((pile-1)//mid+1 for pile in piles)
             if tsum<=h:
                 r=mid
             else:
