@@ -2,8 +2,6 @@ class Solution:
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
         #minimum k s.t. sum(pile//k +1) <=h
         
-        #if h==len(piles) then k=max(piles)
-        n=len(piles)
         l,r=1,max(piles)
         
         while l<r:
