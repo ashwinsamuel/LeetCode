@@ -10,16 +10,15 @@ class Solution:
             heapq.heappush(lheap , (-time[i][0]-time[i][2],-i) )
         
         while n>0 or rpushq or rheap:
-            if lpushq and lpushq[0][0]<=t:
-                while lpushq and lpushq[0][0]<=t:
-                    _,i = heapq.heappop(lpushq)
-                    heapq.heappush( lheap ,  (-time[i][0]-time[i][2],-i))
+
+            while lpushq and lpushq[0][0]<=t:
+                _,i = heapq.heappop(lpushq)
+                heapq.heappush( lheap ,  (-time[i][0]-time[i][2],-i))
             
-            if rpushq and rpushq[0][0]<=t:
-                while rpushq and rpushq[0][0]<=t:
-                    _,i = heapq.heappop(rpushq)
-                    heapq.heappush( rheap ,  (-time[i][0]-time[i][2],-i))
-                    #print(rheap)
+            while rpushq and rpushq[0][0]<=t:
+                _,i = heapq.heappop(rpushq)
+                heapq.heappush( rheap ,  (-time[i][0]-time[i][2],-i))
+                #print(rheap)
             
             
             if rheap:
