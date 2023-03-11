@@ -1,33 +1,32 @@
 class Solution:
     def findCrossingTime(self, n: int, k: int, time: List[List[int]]) -> int:
-        
-        t=0
-        bfree=0
-        lpushq,rpushq = [],[]
-        lheap,rheap=[],[]
-        
-        for i in range(k):
-            heapq.heappush(lheap , (-time[i][0]-time[i][2],-i) )
-        
-        while n>0 or rpushq or rheap:
+        ans = free = 0 
+        l, ll = [], []
+        r, rr = [], []
+        for i, (x, _, y, _) in enumerate(time): heappush(ll, (-x-y, -i))
+        while n or r or rr: 
+            if not rr and (not r or r[0][0] > free) and (not n or not ll and (not l or l[0][0] > free)): 
+                cand = inf 
+                if n and l: cand = min(cand, l[0][0])
+                if r: cand = min(cand, r[0][0])
+                free = cand
+                
+            while r and r[0][0] <= free: 
+                _, i = heappop(r)
+                heappush(rr, (-time[i][0] - time[i][2], -i))
 
-            while lpushq and lpushq[0][0]<=t:
-                _,i = heapq.heappop(lpushq)
-                heapq.heappush( lheap ,  (-time[i][0]-time[i][2],-i))
-            
-            while rpushq and rpushq[0][0]<=t:
-                _,i = heapq.heappop(rpushq)
-                heapq.heappush( rheap ,  (-time[i][0]-time[i][2],-i))
-            
-            if rheap:
-                eff,i = heapq.heappop(rheap)
-                bfree = t + time[-i][2]
-                heapq.heappush(lpushq, (bfree+time[-i][3],-i))
-            elif n>0 and lheap:
-                eff,i = heapq.heappop(lheap)
-                bfree = t + time[-i][0]
-                heapq.heappush(rpushq , (bfree+time[-i][1],-i))
-                n-=1
-            t=max(bfree,t+1)
-
-        return bfree
+            while l and l[0][0] <= free: 
+                _, i = heappop(l)
+                heappush(ll, (-time[i][0] - time[i][2], -i))
+                
+            if rr: 
+                _, i = heappop(rr)
+                free += time[-i][2]
+                if n: heappush(l, (free + time[-i][3], -i))
+                else: ans = max(ans, free)
+            else: 
+                _, i = heappop(ll)
+                free += time[-i][0]
+                heappush(r, (free + time[-i][1], -i))
+                n -= 1
+        return ans 
