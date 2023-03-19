@@ -1,22 +1,35 @@
 class Solution:
     def beautifulSubsets(self, nums: List[int], k: int) -> int:
-        n = len(nums)
-        output = 0
-        
-        def dfs(i, ctr):
-            nonlocal output
-            if i == n:
-                if ctr:
-                    output += 1
+        def addall(i,j,vis,n,num):
+            if n<0:          
+                vis.add(num)
                 return
             
-            if nums[i] - k not in ctr and nums[i] + k not in ctr:
-                ctr[nums[i]] += 1
-                dfs(i + 1, ctr)
-                ctr[nums[i]] -= 1
-                if not ctr[nums[i]]:
-                    del ctr[nums[i]]
-            dfs(i + 1, ctr)
+            if i==n or j==n:
+                addall(i,j,vis,n-1,num)
+            else:
+                addall(i,j,vis,n-1,num)
+                num = num^(1<<n)
+                addall(i,j,vis,n-1,num)
+            return 
         
-        dfs(0, Counter())
-        return output
+        mp = {i:[] for i in range(1,1001)}
+        n=len(nums)
+        vis=set()
+        
+        for i in range(n):
+            mp[nums[i]].append(i)
+            if (nums[i]-k) in mp:
+                for j in mp[nums[i]-k]:
+                    bno = (1<<i) | (1<<j)
+                    addall(i,j,vis,n-1,bno)
+                    #print(f'{j,i}: {vis}')
+                    
+            if (nums[i]+k) in mp:
+                for j in mp[nums[i]+k]:
+                    bno = (1<<i) | (1<<j)
+                    addall(i,j,vis,n-1,bno)
+                    #print(f'{j,i}: {vis}')
+        return (1<<n) - len(vis) -1
+                        
+                
