@@ -6,8 +6,6 @@ class Solution:
             idx = num %value
             mp[idx] = mp.get(idx,0) +1
         
-        print(mp)
-        
         mini = float('inf')
         for i in range(value):
             if i not in mp:
