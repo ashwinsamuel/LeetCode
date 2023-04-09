@@ -1,25 +1,30 @@
 from sortedcontainers import SortedList
+from collections import deque
 
 class Solution:
-    def minReverseOperations(self, n, p, banned_vals, K):
-        remaining = [SortedList(), SortedList()]
-        banned = set(banned_vals)
-        for u in range(n):
-            if u != p and u not in banned:
-                remaining[u & 1].add(u)
-
-        queue = [p]
-        dist = [-1] * n
-        dist[p] = 0
-        for node in queue:
-            lo = max(node - K + 1, 0)
-            lo = 2 * lo + K - 1 - node
-            hi = min(node + K - 1, n - 1) - (K - 1)
-            hi = 2 * hi + K - 1 - node
-
-            for nei in list(remaining[lo % 2].irange(lo, hi)):
-                queue.append(nei)
-                dist[nei] = dist[node] + 1
-                remaining[lo % 2].remove(nei)
+    def minReverseOperations(self, n: int, p: int, banned: List[int], k: int) -> List[int]:
+        banned=set(banned)
+        unvisited=[SortedList([]),SortedList([])]
+        for i in range(n):
+            if i not in banned:
+                unvisited[i%2].add(i)
+            
+        result = [-1]*n
         
-        return dist
+        que = deque([(p,0)])
+        result[p]=0
+        unvisited[p%2].remove(p)
+        
+        while que:
+            nd,d = que.popleft()
+            lo = max(nd-k+1,0)
+            lo=2*lo-nd+k-1
+            hi=min(nd+k-1,n-1)
+            hi=2*hi-k-nd+1
+            
+            for ne in list(unvisited[(nd+k-1)%2].irange( lo , hi ) ): #2
+                que.append((ne,d+1))
+                result[ne]=d+1
+                unvisited[(nd+k-1)%2].remove(ne)
+        
+        return result
