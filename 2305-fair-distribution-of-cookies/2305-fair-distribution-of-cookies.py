@@ -7,7 +7,6 @@ class Solution:
                 if (i>>shift)&1:
                     tsum[i]+=cookies[shift]
         
-        
         dp = [[0 for msk in range(1<<len(cookies))] for i in range(k)]
         
         for msk in range(1<<len(cookies)):
