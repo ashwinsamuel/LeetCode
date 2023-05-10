@@ -19,11 +19,7 @@ class Solution:
                 dp[i][msk]=float('inf')
                 while submsk:
                     submsk = (submsk-1)&msk
-                    xor = submsk^msk
-                    dp[i][msk] = min(dp[i][msk] , max(dp[i-1][submsk],tsum[xor]))
-        
-        for i in range(k):
-            print(dp[i])
+                    dp[i][msk] = min(dp[i][msk] , max(dp[i-1][submsk],tsum[submsk^msk]))
         
         return dp[k-1][(1<<len(cookies))-1]
                     
