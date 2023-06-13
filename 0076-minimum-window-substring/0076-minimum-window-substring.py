@@ -15,12 +15,10 @@ class Solution:
                     break
             r+=1
         
-        print(f'first {l},{r}')
-        
         if cnt>0:
             return ""
         else:
-            ans = s[:r+1]
+            lMin,rMin = 0,r
             tmin = r+1
             while True:
                 ch = s[l]
@@ -37,9 +35,10 @@ class Solution:
                         r+=1
                     if r==n:
                         break
-                print(l,r)
+                        
                 if r-l+1<tmin:
-                    ans = s[l:r+1] #could be optimized
+                    lMin,rMin = l,r
                     tmin = r-l+1
         
+        ans = s[lMin:rMin+1]
         return ans
