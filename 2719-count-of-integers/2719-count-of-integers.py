@@ -90,7 +90,7 @@ class Solution:
         
         dp={}
         ans=0
-        MOD = (10**9) + 7
+        MOD = 10**9+7
         
         for tsum in range(min_sum,max_sum+1):
             d = count_digits(int(num2))
