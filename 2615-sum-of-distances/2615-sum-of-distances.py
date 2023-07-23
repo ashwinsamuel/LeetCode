@@ -1,21 +1,27 @@
 class Solution:
     def distance(self, nums: List[int]) -> List[int]:
-        n = len(nums)
-        freq = {}
-        for i in range(n):
-            if nums[i] not in freq:
-                freq[nums[i]] = []
-            freq[nums[i]].append(i)
-
-        arr = [0] * n
-        for k, v in freq.items():
-            prev_sum = sum(v)
-            n=len(v)
-            counter=n
-            for i, idx in enumerate(v):
-                arr[idx] = prev_sum - counter*idx + (n-counter)*idx
-                prev_sum -= 2*idx
-                counter -= 1
-                #print(prev_sum, counter)
-
-        return arr
+        
+        cnt={}
+        n=len(nums)
+        for i,num in enumerate(nums):
+            if num not in cnt:
+                cnt[num]=[]
+            cnt[num].append(i)
+        
+        result=[0]*n
+        
+        for k,ll in cnt.items():
+            n=len(ll)
+            tsum,prefix=sum(ll),0
+            
+            for i in range(n):
+                idx = ll[i]
+                tsum-=idx
+                result[idx] = (tsum - (n-i-1)*idx) + (i*idx - prefix)
+                prefix+=idx
+                
+        
+        return result
+            
+            
+            
