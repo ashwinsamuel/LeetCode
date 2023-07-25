@@ -12,7 +12,7 @@ class Solution:
         qu = [(0,0,0)]
         m,n = len(grid),len(grid[0])
         vis = set([(0,0)])
-        
+
         while qu:
             time, i , j = heapq.heappop(qu)
             
@@ -23,9 +23,12 @@ class Solution:
                 nei,nej = i+dx,j+dy
                 if 0<=nei<m and 0<=nej<n and (nei,nej) not in vis:
                     vis.add((nei,nej))
+                    #print(i,j)
                     if time+1>=grid[nei][nej]:
                         heapq.heappush(qu,(time+1,nei,nej))
                     else:
                         mul = (grid[nei][nej] - time)//2
                         heapq.heappush(qu,(time+2*mul + 1,nei,nej))
+        
+        return -1
             
