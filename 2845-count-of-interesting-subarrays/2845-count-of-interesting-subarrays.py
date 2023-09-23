@@ -8,8 +8,6 @@ class Solution:
             else:
                 presum.append(presum[-1])
         
-        print(presum)
-        
         i,n=0,len(presum)
         cnt={}
         while i<n:
