@@ -27,8 +27,7 @@ class Solution:
             if len(dp[i])>ans:
                 ans=len(dp[i])
                 ansi = i
-            print(dp[i])
-        print(ansi)
+
         result=[]
         for idx in dp[ansi]:
             result.append(words[idx])
