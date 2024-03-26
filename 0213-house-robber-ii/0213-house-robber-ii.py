@@ -1,7 +1,9 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
         def rob1(num):
-            if len(num) < 2:
+            if not num:
+                return 0
+            elif len(num) == 1:
                 return num[0]
             else:
                 dp = [num[0] , max(num[0],num[1])]
@@ -10,10 +12,9 @@ class Solution:
                 
                 return dp[len(num)-1]
         
-        if len(nums)<2:
+        if len(nums)==1:
             return nums[0]
+        elif len(nums)==2:
+            return max(nums[0],nums[1])
         else:
-            part1 = nums[:-1]
-            part2 = nums[1:]
-            
-            return max( rob1(part1) , rob1(part2) )
+            return max(nums[0]+rob1( nums[2:-1]) , rob1(nums[1:]) )
